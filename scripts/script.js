@@ -31,25 +31,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let currNumber = elemNumber
         newPost.addEventListener('click', function(){
-          setState('entry', newPost, currNumber);
-        })
+          setState({ type: "entry", entry: newPost }, currNumber, false);
+        });
         elemNumber++;
       });
     });
+    setState({type: "journal-entry"}, 0 , false);
 });
 
 var setting = document.querySelector('img');
 setting.addEventListener('click', function(){
-  setState('settings', null, null);
+  setState({type: "settings"}, 0, false);
 })
 
-window.addEventListener('popstate', () => {
-  goBack();
+window.addEventListener('popstate', (event) => {
+  setState(event.state, 0, true);
 })
 
 var titl = document.querySelector('h1');
 titl.addEventListener('click', () => {
   if(location.hash != ""){
-    setState('journal-entry', null, null);
+    setState({type: "journal-entry"}, 0, false);
   }
 })

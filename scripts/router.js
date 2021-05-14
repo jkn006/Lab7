@@ -5,7 +5,7 @@ export const router = {};
 /**
  * Changes the "page" (state) that your SPA app is currently set to
  */
-router.setState = function(state, info, elemNumber) {
+router.setState = function(state, elemNumber, tf) {
   /**
    * - There are three states that your SPA app will have
    *    1. The home page
@@ -36,57 +36,50 @@ router.setState = function(state, info, elemNumber) {
    *    2. You may modify the parameters of setState() as much as you like
    */
 
-    if(state == 'settings'){
-      let body = document.querySelector('body');
-      body.setAttribute('class', 'settings')
-
-      let stateArr = {};
+  if(state.type == 'settings'){
+    if(!tf){
+      let stateArr = state;
       let path = "/#settings"
       history.pushState(stateArr, "Settings", path);
-
-      let top = document.querySelector("header h1");
-      top.innerHTML = "Settings";
     }
 
-    else if(state == 'entry'){
-      let body = document.querySelector('body');
-      body.setAttribute('class', 'single-entry');
+    let body = document.querySelector('body');
+    body.setAttribute('class', 'settings')
 
-      let newEntry = document.querySelector('entry-page');
-      newEntry.entry = info.entry;
+    let top = document.querySelector("header h1");
+    top.innerHTML = "Settings";
+  }
 
-      let top = document.querySelector("header h1");
-      top.innerHTML = "Entry #" + elemNumber;
-
-      let stateArr = {};
+  else if(state.type == 'entry'){
+    if(!tf){
+      let title = "Entry"
       let path = "/#entry" + elemNumber;
-      history.pushState(stateArr, "Entry" + elemNumber, path);
+      history.pushState(state, title, path);
     }
 
-    else if(state == 'journal-entry'){
-      let body = document.querySelector("body");
-      body.removeAttribute('class', 'settings');
-      body.removeAttribute('class', 'single-entry');
+    let body = document.querySelector('body');
+    body.setAttribute('class', 'single-entry');
 
-      let entryPage = document.querySelector('entry-page');
-      entryPage.remove();
-      let newEntryPage = document.createElement('entry-page');
-      body.appendChild(newEntryPage);
+    let newEntry = document.createElement('entry-page');
+    newEntry.entry = state.entry;
 
-      let top = document.querySelector("header h1");
-      top.innerHTML = "Journal Entries";
+    let firstEntry = document.querySelector('entry-name')[0];
+    body.appendChild(newEntry);
+    body.removeChild(firstEntry);
 
-      let stateArr = {};
+    let top = document.querySelector("header h1");
+    top.innerHTML = "Entry #" + elemNumber;
+  }
+
+  else if(state.type == 'journal-entry'){
+    if(!tf){
+      let stateArr = state;
       let path = "/";
-      history.pushState(stateArr, "Journal Entries", path);      
+      history.pushState(stateArr, "Journal Entries", path);  
     }
-}
-
-router.goBack = function(){
-  if(location.hash == ""){
     let body = document.querySelector("body");
-    body.removeAttribute("class", "settings");
-    body.removeAttribute("class", "single-entry");
+    body.removeAttribute('class', 'settings');
+    body.removeAttribute('class', 'single-entry');
 
     let entryPage = document.querySelector('entry-page');
     entryPage.remove();
@@ -94,34 +87,50 @@ router.goBack = function(){
     body.appendChild(newEntryPage);
 
     let top = document.querySelector("header h1");
-    top.innerHTML = "Journal Entries";
-  }
-
-  else if(location.hash == "#settings"){
-    let body = document.querySelector('body');
-    body.setAttribute('class', 'settings');
-
-    let top = document.querySelector("header h1");
-    top.innerHTML = "Settings";
-  }
-
-  else{
-    let body = document.querySelector('body');
-    body.setAttribute('class', 'single-entry');
-
-    let main = document.querySelector('main')
-    let newEntry = document.createElement('entry-page');
-    let index = location.hash.substring(6,location.hash.length);
-    let newJournal = main.childNodes[Number(index) - 1]
-    newEntry.entry = newJournal.entry;
-
-    let entryPage = document.querySelector('entry-page');
-    entryPage.remove();
-    body.appendChild(newEntry);
-
-    let top = document.querySelector("header h1");
-    top.innerHTML = "Entry #" + index;
+    top.innerHTML = "Journal Entries";    
   }
 }
+
+// router.goBack = function(){
+//   if(location.hash == ""){
+//     let body = document.querySelector("body");
+//     body.removeAttribute("class", "settings");
+//     body.removeAttribute("class", "single-entry");
+
+//     let entryPage = document.querySelector('entry-page');
+//     entryPage.remove();
+//     let newEntryPage = document.createElement('entry-page');
+//     body.appendChild(newEntryPage);
+
+//     let top = document.querySelector("header h1");
+//     top.innerHTML = "Journal Entries";
+//   }
+
+//   else if(location.hash == "#settings"){
+//     let body = document.querySelector('body');
+//     body.setAttribute('class', 'settings');
+
+//     let top = document.querySelector("header h1");
+//     top.innerHTML = "Settings";
+//   }
+
+//   else{
+//     let body = document.querySelector('body');
+//     body.setAttribute('class', 'single-entry');
+
+//     let main = document.querySelector('main')
+//     let newEntry = document.createElement('entry-page');
+//     let index = location.hash.substring(6,location.hash.length);
+//     let newJournal = main.childNodes[Number(index) - 1]
+//     newEntry.entry = newJournal.entry;
+
+//     let entryPage = document.querySelector('entry-page');
+//     entryPage.remove();
+//     body.appendChild(newEntry);
+
+//     let top = document.querySelector("header h1");
+//     top.innerHTML = "Entry #" + index;
+//   }
+// }
 
 
