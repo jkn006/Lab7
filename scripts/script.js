@@ -2,6 +2,9 @@
 
 import { router } from './router.js'; // Router imported so you can use it to manipulate your SPA app here
 const setState = router.setState;
+const goBack = router.goBack;
+
+var location = window.location;
 
 // Make sure you register your service worker here too
 
@@ -18,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let currNumber = elemNumber
         newPost.addEventListener('click', function(){
-          router.setState('entry', newPost, currNumber);
+          setState('entry', newPost, currNumber);
         })
         elemNumber++;
       });
@@ -27,40 +30,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 var setting = document.querySelector('img');
 setting.addEventListener('click', function(){
-  router.setState('settings', null);
+  setState('settings', null, null);
 })
 
 window.addEventListener('popstate', () => {
-  let body = document.querySelector("body");
-  if(body.className == "settings"){
-    body.removeAttribute("class", "settings");
-  }
-  else if(body.className == "single-entry"){
-    body.removeAttribute("class", "single-entry");
-    let entryPage = document.querySelector('entry-page');
-    entryPage.remove();
-    let newEntryPage = document.createElement('entry-page');
-    body.appendChild(newEntryPage);
-  }
-  let top = document.querySelector("header h1");
-  top.innerHTML = "Journal Entries";
+  goBack();
 })
 
 var titl = document.querySelector('h1');
 titl.addEventListener('click', () => {
-  let body = document.querySelector("body");
-  if(body.className == "settings"){
-    body.removeAttribute("class", "settings");
+  if(location.hash != ""){
+    setState('journal-entry', null, null);
   }
-  else if(body.className == "single-entry"){
-    body.removeAttribute("class", "single-entry");
-    let entryPage = document.querySelector('entry-page');
-    entryPage.remove();
-    let newEntryPage = document.createElement('entry-page');
-    body.appendChild(newEntryPage);
-  }
-  let top = document.querySelector("header h1");
-  top.innerHTML = "Journal Entries";
-  history.back();
 })
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js').then(function(registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
