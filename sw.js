@@ -25,6 +25,10 @@ self.addEventListener('install', function(event) {
     );
 });
 
+self.addEventListener('activate', event => {
+    event.waitUntil(clients.claim());
+});
+
 self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request)
@@ -58,8 +62,3 @@ self.addEventListener('fetch', function(event) {
       })
     );
 });
-
-self.addEventListener('activate', event => {
-    event.waitUntil(clients.claim());
-});
-
