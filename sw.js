@@ -2,7 +2,7 @@
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-      navigator.serviceWorker.register('./sw.js').then(function(registration) {
+      navigator.serviceWorker.register('sw.js').then(function(registration) {
         console.log('ServiceWorker registration successful with scope: ', registration.scope);
       }, function(err) {
         console.log('ServiceWorker registration failed: ', err);
@@ -10,7 +10,7 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-var CACHE_NAME = 'my-site-cache-v1';
+var CACHE_NAME = 'Lab7-service-worker';
 var urlsToCache = [
     'https://cse110lab6.herokuapp.com/entries'
 ];
