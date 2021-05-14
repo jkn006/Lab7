@@ -11,9 +11,7 @@
 //   }
 
 var CACHE_NAME = 'Lab7-service-worker';
-var urlsToCache = [
-    'https://cse110lab6.herokuapp.com/entries'
-];
+var urlsToCache = ['https://cse110lab6.herokuapp.com/entries'];
 // // You will need 3 event listeners:
 // //   - One for installation
 self.addEventListener('install', function(event) {
