@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 var setting = document.querySelector('img');
 setting.addEventListener('click', function(){
+  if(location.hash == "#settings"){
+    break;
+  }
   setState({type: "settings"}, 0, false);
 })
 
