@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         elemNumber++;
       });
     });
-    setState({type: "journal-entry"}, 0 , false);
 });
 
 var setting = document.querySelector('img');
