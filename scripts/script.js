@@ -44,7 +44,12 @@ setting.addEventListener('click', function(){
 })
 
 window.addEventListener('popstate', (event) => {
-  setState(event.state, 0, true);
+  if(event.state == null){
+    setState({type: "journal-entry"}, 0, true);
+  }
+  else{
+    setState(event.state, 0, true);
+  }
 })
 
 var titl = document.querySelector('h1');
