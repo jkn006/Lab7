@@ -39,7 +39,7 @@ router.setState = function(state, elemNumber, tf) {
   if(state.type == 'settings'){
     if(!tf){
       let stateArr = state;
-      let path = "/#settings"
+      let path = "/#settings";
       history.pushState(stateArr, "Settings", path);
     }
 
@@ -52,7 +52,7 @@ router.setState = function(state, elemNumber, tf) {
 
   else if(state.type == 'entry'){
     if(!tf){
-      let title = "Entry"
+      let title = "Entry";
       let path = "/#entry" + elemNumber;
       history.pushState(state, title, path);
     }
@@ -63,9 +63,10 @@ router.setState = function(state, elemNumber, tf) {
     let newEntry = document.createElement('entry-page');
     newEntry.entry = state.entry;
 
-    let firstEntry = document.querySelector('entry-name')[0];
-    body.appendChild(newEntry);
+    let firstEntry = document.querySelector('entry-page');
     body.removeChild(firstEntry);
+    body.appendChild(newEntry);
+    
 
     let top = document.querySelector("header h1");
     top.innerHTML = "Entry #" + elemNumber;
@@ -91,46 +92,5 @@ router.setState = function(state, elemNumber, tf) {
   }
 }
 
-// router.goBack = function(){
-//   if(location.hash == ""){
-//     let body = document.querySelector("body");
-//     body.removeAttribute("class", "settings");
-//     body.removeAttribute("class", "single-entry");
-
-//     let entryPage = document.querySelector('entry-page');
-//     entryPage.remove();
-//     let newEntryPage = document.createElement('entry-page');
-//     body.appendChild(newEntryPage);
-
-//     let top = document.querySelector("header h1");
-//     top.innerHTML = "Journal Entries";
-//   }
-
-//   else if(location.hash == "#settings"){
-//     let body = document.querySelector('body');
-//     body.setAttribute('class', 'settings');
-
-//     let top = document.querySelector("header h1");
-//     top.innerHTML = "Settings";
-//   }
-
-//   else{
-//     let body = document.querySelector('body');
-//     body.setAttribute('class', 'single-entry');
-
-//     let main = document.querySelector('main')
-//     let newEntry = document.createElement('entry-page');
-//     let index = location.hash.substring(6,location.hash.length);
-//     let newJournal = main.childNodes[Number(index) - 1]
-//     newEntry.entry = newJournal.entry;
-
-//     let entryPage = document.querySelector('entry-page');
-//     entryPage.remove();
-//     body.appendChild(newEntry);
-
-//     let top = document.querySelector("header h1");
-//     top.innerHTML = "Entry #" + index;
-//   }
-// }
 
 

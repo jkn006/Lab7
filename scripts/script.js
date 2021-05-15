@@ -10,7 +10,7 @@ var location = window.location;
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('./sw.js').then(function(registration) {
+    navigator.serviceWorker.register('/lab7/sw.js').then(function(registration) {
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
     }, function(err) {
       console.log('ServiceWorker registration failed: ', err);
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let currNumber = elemNumber
         newPost.addEventListener('click', function(){
-          setState({ type: "entry", entry: newPost }, currNumber, false);
+          setState({ type: "entry", entry: entry }, currNumber, false);
         });
         elemNumber++;
       });
