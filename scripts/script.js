@@ -40,10 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 var setting = document.querySelector('img');
 setting.addEventListener('click', function(){
-  if(location.hash == "#settings"){
-    break;
+  if(location.hash != "#settings"){
+    setState({type: "settings"}, 0, false);
   }
-  setState({type: "settings"}, 0, false);
 })
 
 window.addEventListener('popstate', (event) => {
