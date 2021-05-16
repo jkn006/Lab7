@@ -8,15 +8,15 @@ var location = window.location;
 
 // Make sure you register your service worker here too
 
-// if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', function() {
-//     navigator.serviceWorker.register('/Lab7/sw.js').then(function(registration) {
-//       console.log('ServiceWorker registration successful with scope: ', registration.scope);
-//     }, function(err) {
-//       console.log('ServiceWorker registration failed: ', err);
-//     });
-//   });
-// }
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/Lab7/sw.js').then(function(registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
 
 var elemNumber = 1;
 
