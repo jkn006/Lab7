@@ -69,7 +69,7 @@ router.setState = function(state, elemNumber, tf) {
     
 
     let top = document.querySelector("header h1");
-    top.innerHTML = "Entry #" + window.location.hash.substring(6, window.location.hash.length);
+    top.innerHTML = "Entry #" + elemNumber;
   }
 
   else if(state.type == 'journal-entry'){
